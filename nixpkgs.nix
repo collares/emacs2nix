@@ -1,8 +1,8 @@
 let
-  inherit ((import <nixpkgs> {}).pkgs) fetchgit lib;
+  inherit ((import <nixpkgs> {}).pkgs) fetchFromGitHub lib;
   lock = builtins.fromJSON (builtins.readFile ./nixpkgs.lock.json);
-  bootstrap = fetchgit {
-    inherit (lock) url rev sha256 fetchSubmodules;
+  bootstrap = fetchFromGitHub {
+    inherit (lock) owner repo rev sha256 fetchSubmodules;
   };
   defaultOverrides =
     let file = ./default.overrides.nix; in
